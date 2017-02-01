@@ -20,8 +20,8 @@ class Cursor
   end
 
   def get_input
-      key = KEYMAP[read_char]
-      handle_key(key)
+    key = KEYMAP[read_char]
+    handle_key(key)
   end
 
   private
@@ -55,4 +55,5 @@ class Cursor
     new_pos = (0..1).map {|i| @cursor_pos[i] + diff[i] }
     @cursor_pos = new_pos if @board.in_bounds?(new_pos)
   end
+  
 end

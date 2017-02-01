@@ -4,7 +4,7 @@ class King < Piece
   include SteppingPiece
 
   def to_s
-    (@color==:white ? "\u2654" : "\u265A").encode('utf-8')
+    (@color == :white ? "\u2654" : "\u265A").encode('utf-8')
   end
 
   def move_dirs

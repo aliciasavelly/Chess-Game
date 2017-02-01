@@ -1,9 +1,9 @@
 require_relative 'board.rb'
 require_relative 'display.rb'
 require_relative 'humanplayer.rb'
-require 'io/console'
 
 class Game
+
   def initialize
     @player_one = get_player(:white)
     @player_two = get_player(:black)
@@ -23,8 +23,6 @@ class Game
 
     render
 
-    winner = @board.checkmate?(:black) ? @player_one : @player_two
-    puts "#{winner.name} is the lesser loser"
   end
 
   def take_turn(color)
@@ -53,7 +51,15 @@ class Game
   end
 
   def over?
-    @board.checkmate?(:white) || @board.checkmate?(:black)
+    winner = @board.checkmate?(:black) ? @player_one.name : @player_two.name
+
+    if @board.checkmate?(:white) || @board.checkmate?(:black)
+      puts "#{winner} won!"
+      sleep 3
+      return true
+    end
+
+    false
   end
 
   def render
@@ -62,7 +68,7 @@ class Game
 
   def get_player(color)
     puts "name?"
-    HumanPlayer.new(gets.chomp,color)
+    HumanPlayer.new(gets.chomp, color)
   end
 
 end

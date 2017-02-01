@@ -8,7 +8,7 @@ class Rook < Piece
   end
 
   def to_s
-    (@color==:white ? "\u2656" : "\u265C").encode('utf-8')
+    (@color == :white ? "\u2656" : "\u265C").encode('utf-8')
   end
 
 end

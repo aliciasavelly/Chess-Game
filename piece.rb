@@ -18,7 +18,6 @@ class Piece
   end
 
   def to_s
-    "O"
   end
 
   def valid_move?(pos)
@@ -49,6 +48,5 @@ class Piece
   def add_position(pos1, pos2)
     (0..1).map {|i| pos1[i] + pos2[i]}
   end
-
 
 end

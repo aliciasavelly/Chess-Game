@@ -8,6 +8,6 @@ class Queen < Piece
   end
 
   def to_s
-    (@color==:white ? "\u2655" : "\u265B").encode('utf-8')
+    (@color == :white ? "\u2655" : "\u265B").encode('utf-8')
   end
 end

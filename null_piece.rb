@@ -16,7 +16,7 @@ class NullPiece < Piece
   end
 
   def dup_with(board)
-    return self
+    self
   end
 
 end

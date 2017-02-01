@@ -98,6 +98,7 @@ class Board
     raise WrongColor unless self[start_pos].color == color
     raise LosingMove if self[start_pos].move_into_check?(end_pos)
     raise EndPositionNotValid unless self[start_pos].moves.include?(end_pos)
+    puts "                                           "
     self.move_piece!(start_pos, end_pos)
   end
 

@@ -39,7 +39,7 @@ class Pawn < Piece
   end
 
   def to_s
-    (@color==:white ? "\u2659" : "\u265F").encode('utf-8')
+    (@color == :white ? "\u2659" : "\u265F").encode('utf-8')
   end
 
 end

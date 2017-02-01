@@ -1,4 +1,5 @@
 module SteppingPiece
+
   def moves
     directions = self.move_dirs
     moves = []
@@ -10,4 +11,5 @@ module SteppingPiece
 
     moves
   end
+  
 end
