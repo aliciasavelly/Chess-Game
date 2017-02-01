@@ -4,12 +4,14 @@ require_relative "pawn.rb"
 require_relative "bishop.rb"
 require_relative "knight.rb"
 require_relative "rook.rb"
-require_relative "king.rb"
 require_relative "queen.rb"
+require_relative "king.rb"
 
 class Board
 
   BLANK_ROW = [:Rook, :Knight, :Bishop, :Queen, :King, :Bishop, :Knight, :Rook]
+
+  attr_accessor :board
 
   def initialize
     @board = setup_board
@@ -20,7 +22,8 @@ class Board
   end
 
   def []=(pos, value)
-    @board[pos[0]][pos[1]] = value
+    x, y = pos
+    @board[x][y] = value
   end
 
   def setup_board
@@ -31,6 +34,7 @@ class Board
             ([[:Pawn] * 8]) + ([BLANK_ROW])
 
     rows.each_with_index do |row, row_i|
+
       if row_i.between?(2, 5)
         row.each { |sym| soon_board[row_i] << eval("#{sym}.instance") }
       else
@@ -38,6 +42,7 @@ class Board
           soon_board[row_i] << eval("#{sym}.new(self, [row_i, j])")
         end
       end
+
     end
 
     soon_board
@@ -77,7 +82,7 @@ class Board
       row.each do |piece|
         piece_moves = []
         piece_moves = piece.moves if piece.color == color
-        moves += piece_moves.reject {|move| piece.move_into_check?(move)}
+        moves += piece_moves.reject { |move| piece.move_into_check?(move) }
       end
     end
 
@@ -89,19 +94,17 @@ class Board
   end
 
   def move_piece(start_pos, end_pos, color)
+    raise NoPieceAtStartPosition if self[start_pos].is_a?(NullPiece)
     raise WrongColor unless self[start_pos].color == color
     raise LosingMove if self[start_pos].move_into_check?(end_pos)
+    raise EndPositionNotValid unless self[start_pos].moves.include?(end_pos)
     self.move_piece!(start_pos, end_pos)
   end
 
   def move_piece!(start_pos, end_pos)
-    raise NoPieceAtStartPosition if self[start_pos].is_a?(NullPiece)
-    raise EndPositionNotValid unless self[start_pos].moves.include?(end_pos)
     self[end_pos] = self[start_pos]
     self[end_pos].position = end_pos
     self[start_pos] = NullPiece.instance
   end
-
-  attr_accessor :board
 
 end
